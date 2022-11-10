@@ -5,6 +5,10 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-22.05";
     nixos-hardware.url = "github:quinn-dougherty/nixos-hardware";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,15 +36,15 @@
     # daedalus.url = github:input-output-hk/daedalus/chore/ddw-1083-flakes;
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nixos-hardware, home-manager
-    , nix-doom-emacs, hercules-ci-agent, hercules-ci-effects, nixinate
-    , python-on-nix }:
+  outputs = { self, nixpkgs, nixpkgs-stable, nixos-hardware, agenix
+    , home-manager, nix-doom-emacs, hercules-ci-agent, hercules-ci-effects
+    , nixinate, python-on-nix }:
     let
       machines = import ./common/machines.nix {
         inherit nixpkgs nixpkgs-stable python-on-nix hercules-ci-effects;
       };
       framework = import ./framework {
-        inherit nixos-hardware home-manager nix-doom-emacs;
+        inherit nixos-hardware agenix home-manager nix-doom-emacs;
         lib = nixpkgs.lib;
         framework = machines.framework;
       };

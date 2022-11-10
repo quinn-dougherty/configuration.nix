@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, machine, ... }:
 
 {
   networking.firewall = {
@@ -18,8 +18,8 @@
           + pkgs.qt5.qtbase.qtQmlPrefix;
       };
       serviceConfig = {
-        ExecStart = "${pkgs.dropbox.out}/bin/dropbox";
-        ExecReload = "${pkgs.coreutils.out}/bin/kill -HUP $MAINPID";
+        ExecStart = "${machine.pkgs.dropbox.out}/bin/dropbox";
+        ExecReload = "${machine.pkgs.coreutils.out}/bin/kill -HUP $MAINPID";
         KillMode = "control-group";
         Restart = "on-failure";
         PrivateTmp = true;

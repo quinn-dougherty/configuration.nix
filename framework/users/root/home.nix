@@ -1,4 +1,4 @@
-{ framework, ... }:
+{ framework, agenix, ... }:
 with framework; {
   programs = {
     direnv = {
@@ -10,7 +10,7 @@ with framework; {
   };
 
   home = {
-    packages = import ./../common/devops.nix { inherit pkgs; };
+    packages = import ./../common/devops.nix { inherit pkgs agenix; };
     username = "root";
     homeDirectory = "/root";
 

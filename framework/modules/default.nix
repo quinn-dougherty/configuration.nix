@@ -1,12 +1,16 @@
-{ framework, nixos-hardware, home-manager, nix-doom-emacs }:
+{ framework, nixos-hardware, agenix, home-manager, nix-doom-emacs }:
 
 [
-  (import ./../system/configuration.nix { inherit framework; })
+  ./../system/configuration.nix
   ./../system/hardware-configuration.nix
   ./x.nix
+  agenix.nixosModule
   nixos-hardware.nixosModules.framework
   home-manager.nixosModules.home-manager
-  (import ./hm.nix { inherit framework nix-doom-emacs; })
+  (import ./hm.nix {
+    inherit nix-doom-emacs agenix;
+    machine = framework;
+  })
   ./../../common/modules/audio.nix
   ./../../common/modules/nix.nix
   ./../../common/modules/cachix
@@ -15,4 +19,6 @@
   ./../../common/modules/audit.nix
   ./../../common/modules/observability.nix
   ./../../common/modules/utilities.nix
+  # ./../../common/modules/age-secrets.nix
+  ./gaming.nix
 ]

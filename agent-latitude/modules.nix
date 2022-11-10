@@ -1,4 +1,4 @@
-{ agent, nixos-hardware, hercules-ci-agent }:
+{ agent, nixos-hardware, agenix, hercules-ci-agent }:
 
 [
   (import ./system/configuration.nix { inherit agent; })
@@ -12,6 +12,7 @@
       hermetic = true;
     };
   }
+  agenix.nixosModule
   nixos-hardware.nixosModules.dell-latitude-3340
   ./system/hardware-configuration.nix
   hercules-ci-agent.nixosModules.agent-service
@@ -23,4 +24,5 @@
   ./../common/modules/audit.nix
   ./../common/modules/observability.nix
   ./../common/modules/utilities.nix
+  ./../common/modules/age-secrets.nix
 ]

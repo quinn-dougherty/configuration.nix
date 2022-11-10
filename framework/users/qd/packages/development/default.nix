@@ -1,6 +1,6 @@
-{ pkgs, pkgs-stable }:
+{ pkgs, pkgs-stable, agenix }:
 let
-  devops = import ./../../../common/devops.nix { inherit pkgs; };
+  devops = import ./../../../common/devops.nix { inherit pkgs agenix; };
   coq-development = import ./coq.nix { pkgs = pkgs-stable; };
   python-development = import ./python.nix { inherit pkgs; };
   rust-development = import ./rust.nix { pkgs = pkgs-stable; };

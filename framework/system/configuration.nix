@@ -1,5 +1,5 @@
-{ framework, ... }:
-with framework; {
+{ config, lib, machine, ... }:
+with machine; {
   boot = {
     loader = {
       # Use the systemd-boot EFI boot loader.
@@ -47,10 +47,10 @@ with framework; {
     EDITOR = "emacs";
     VISUAL = "emacs";
   };
-  nixpkgs.config = config;
+  # nixpkgs.config = config;
 
   programs = {
-    steam.enable = true;
+    # steam.enable = true;
 
     gnupg.agent = {
       enable = true;
